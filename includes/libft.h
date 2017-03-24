@@ -15,10 +15,18 @@
 # define FT_ABS(x) ((x) < 0 ? -(x) : (x))
 # define FT_MAX(x, y) ((x) > (y) ? (x) : (y))
 # define FT_MIN(x, y) ((x) < (y) ? (x) : (y))
+# define ISDIGIT(d) ((d) >= '0' && (d) <= '9')
+# define CTOD(c) ((c) - '0')
+# define DTOC(n)	((n) + '0')
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "get_next_line.h"
+
+typedef enum	e_bool
+{
+	false = 0,
+	true = 1
+}				t_bool;
 
 typedef struct	s_list
 {
@@ -72,6 +80,7 @@ void			*ft_memchr(const void *src, int c, size_t count);
 int				ft_memcmp(const void *s1, const void *s2, size_t count);
 void			ft_memswap(void *a, void *b, size_t size);
 size_t			ft_strlen(const char *str);
+size_t			ft_strnlen(const char *s, size_t maxlen);
 char			*ft_strdup(const char *str);
 char			*ft_strcpy(char *dest, const char *src);
 char			*ft_strncpy(char *dest, const char *src, size_t count);
@@ -141,4 +150,11 @@ t_point			ft_3d_to_2d(t_point_3d a, t_point p);
 t_pos			ft_create_pos(double max, double min, double dt, double pos);
 t_point			ft_perspective(t_point_3d a, t_point_3d c,
 								t_point_3d thi, t_point_3d e);
+int				get_next_line(int const fd, char **line);
+t_bool			ft_getendian(void);
+char			ft_wchrbin(wchar_t c);
+char			ft_utf8chrsize(wchar_t c);
+wchar_t			ft_utf8chrencode(wchar_t c);
+int				ft_printf(const char *format, ...);
+int				ft_printf_fd(int fd, const char *format, ...);
 #endif

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_wchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalcoci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/22 14:51:04 by amalcoci          #+#    #+#             */
-/*   Updated: 2016/08/22 14:51:09 by amalcoci         ###   ########.fr       */
+/*   Created: 2017/03/20 14:26:00 by amalcoci          #+#    #+#             */
+/*   Updated: 2017/03/20 14:26:00 by amalcoci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <libft.h>
+#include "../includes/ft_printf.h"
 
-int		main(void)
+int			print_wchar(int fd, t_printf env, wint_t c)
 {
-	FILE *f= fopen("main.c","r");
-	FILE *t= fopen("test.txt","w");
-	char *str;
-	get_next_line(fileno(f), &str);
-	ft_printf("%s",str);
-	ft_printf_fd(fileno(t),"%s",str);
-	fclose(f);
-	fclose(t);
+	wchar_t wchar;
+
+	wchar = ft_utf8chrencode(c);
+	env.size = ft_utf8chrsize(wchar);
+	return (print_all(fd, env, (char *)&wchar));
 }

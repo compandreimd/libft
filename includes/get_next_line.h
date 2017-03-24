@@ -21,6 +21,4 @@ typedef struct	s_get_next_history
 	char	*cache;
 }				t_get_next_history;
 
-int				get_next_line(int const fd, char **line);
-
 #endif

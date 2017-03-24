@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env_dot.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalcoci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/22 14:51:04 by amalcoci          #+#    #+#             */
-/*   Updated: 2016/08/22 14:51:09 by amalcoci         ###   ########.fr       */
+/*   Created: 2017/03/20 12:31:00 by amalcoci          #+#    #+#             */
+/*   Updated: 2017/03/20 12:31:00 by amalcoci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <libft.h>
+#include "../includes/ft_printf.h"
 
-int		main(void)
+t_bool				get_dot(char *c, const char **fmt,
+						t_printf *env, va_list *argp)
 {
-	FILE *f= fopen("main.c","r");
-	FILE *t= fopen("test.txt","w");
-	char *str;
-	get_next_line(fileno(f), &str);
-	ft_printf("%s",str);
-	ft_printf_fd(fileno(t),"%s",str);
-	fclose(f);
-	fclose(t);
+	if (ISDIGIT(*c))
+	{
+		while (ISDIGIT(*c))
+		{
+			env->prec = 10 * env->prec + CTOD(*c);
+			*c = *++*fmt;
+		}
+		--*fmt;
+	}
+	else if (*c == '*')
+	{
+		env->prec = va_arg(*argp, int);
+	}
+	else
+		return (false);
+	return (true);
 }

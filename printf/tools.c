@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalcoci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/22 14:51:04 by amalcoci          #+#    #+#             */
-/*   Updated: 2016/08/22 14:51:09 by amalcoci         ###   ########.fr       */
+/*   Created: 2017/03/20 12:22:00 by amalcoci          #+#    #+#             */
+/*   Updated: 2017/03/20 12:22:00 by amalcoci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <libft.h>
+#include "../includes/ft_printf.h"
+#include <string.h>
+#include <unistd.h>
 
-int		main(void)
+int		pad(int fd, int size, char c)
 {
-	FILE *f= fopen("main.c","r");
-	FILE *t= fopen("test.txt","w");
-	char *str;
-	get_next_line(fileno(f), &str);
-	ft_printf("%s",str);
-	ft_printf_fd(fileno(t),"%s",str);
-	fclose(f);
-	fclose(t);
+	int n;
+
+	n = 0;
+	while (size > 0)
+	{
+		n += write(fd, &c, 1);
+		size -= 1;
+	}
+	return (n);
 }

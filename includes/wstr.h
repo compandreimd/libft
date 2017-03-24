@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   wstr.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalcoci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/22 14:51:04 by amalcoci          #+#    #+#             */
-/*   Updated: 2016/08/22 14:51:09 by amalcoci         ###   ########.fr       */
+/*   Created: 2017/03/22 18:44:00 by amalcoci          #+#    #+#             */
+/*   Updated: 2017/03/22 18:44:00 by amalcoci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <libft.h>
+#ifndef WSTR_H
+# define WSTR_H
+# define UTF8_BEM_MASK2		(0xC080)
+# define UTF8_BEM_MASK3		(0xE08080)
+# define UTF8_BEM_MASK4		(0xF0808080)
+# define UTF8_LEM_MASK2		(0x80C0)
+# define UTF8_LEM_MASK3		(0x8080E0)
+# define UTF8_LEM_MASK4		(0x808080F0)
+# define UTF8_SUBCHR		(0x1A)
+# define UTF8_BITSNBR1		(7)
+# define UTF8_BITSNBR2		(11)
+# define UTF8_BITSNBR3		(16)
+# define UTF8_BITSNBR4		(21)
 
-int		main(void)
-{
-	FILE *f= fopen("main.c","r");
-	FILE *t= fopen("test.txt","w");
-	char *str;
-	get_next_line(fileno(f), &str);
-	ft_printf("%s",str);
-	ft_printf_fd(fileno(t),"%s",str);
-	fclose(f);
-	fclose(t);
-}
+#endif

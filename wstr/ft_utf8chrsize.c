@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_utf8chrsize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalcoci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/22 14:51:04 by amalcoci          #+#    #+#             */
-/*   Updated: 2016/08/22 14:51:09 by amalcoci         ###   ########.fr       */
+/*   Created: 2017/03/22 18:39:00 by amalcoci          #+#    #+#             */
+/*   Updated: 2017/03/22 18:39:00 by amalcoci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <libft.h>
+#include "../includes/libft.h"
 
-int		main(void)
+char						ft_utf8chrsize(wchar_t c)
 {
-	FILE *f= fopen("main.c","r");
-	FILE *t= fopen("test.txt","w");
-	char *str;
-	get_next_line(fileno(f), &str);
-	ft_printf("%s",str);
-	ft_printf_fd(fileno(t),"%s",str);
-	fclose(f);
-	fclose(t);
+	if ((unsigned int)c < 0xFF)
+		return (1);
+	else if ((unsigned int)c < 0xFFFF)
+		return (2);
+	else if ((unsigned int)c < 0xFFFFFF)
+		return (3);
+	else if ((unsigned int)c < 0xFFFFFFFF)
+		return (4);
+	else
+		return (-1);
 }

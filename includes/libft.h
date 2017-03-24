@@ -12,9 +12,13 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define FT_ABS(x) ((x) < 0 ? -(x) : (x))
+# define FT_MAX(x, y) ((x) > (y) ? (x) : (y))
+# define FT_MIN(x, y) ((x) < (y) ? (x) : (y))
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "get_next_line.h"
 
 typedef struct	s_list
 {
@@ -23,6 +27,42 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+typedef struct	s_rgb
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}				t_rgb;
+
+typedef struct	s_point
+{
+	double			x;
+	double			y;
+	t_rgb			color;
+}				t_point;
+
+typedef struct	s_point_3d
+{
+	double			x;
+	double			y;
+	double			z;
+	t_rgb			color;
+}				t_point_3d;
+
+typedef struct	s_line
+{
+	t_point			a;
+	t_point			b;
+}				t_line;
+
+typedef struct	s_pos
+{
+	double		pos;
+	double		max;
+	double		min;
+	double		dt;
+}				t_pos;
+
 void			*ft_memset(void *dest, int ch, size_t count);
 void			ft_bzero(void *dest, size_t count);
 void			*ft_memcpy(void *dest, const void *src, size_t count);
@@ -30,6 +70,7 @@ void			*ft_memccpy(void *dest, const void *src, int c, size_t count);
 void			*ft_memmove(void *dest, const void *src, size_t count);
 void			*ft_memchr(const void *src, int c, size_t count);
 int				ft_memcmp(const void *s1, const void *s2, size_t count);
+void			ft_memswap(void *a, void *b, size_t size);
 size_t			ft_strlen(const char *str);
 char			*ft_strdup(const char *str);
 char			*ft_strcpy(char *dest, const char *src);
@@ -89,4 +130,15 @@ int				ft_is_space(char c);
 void			ft_freestab(char **tab);
 char			*ft_getline(int fd);
 int				ft_is(const char	*str, int (*f)(char));
+void			ft_line(t_line line, void *data,
+						double dt, void (*draw)(t_point, void*));
+t_rgb			ft_create_rgb(int i);
+int				ft_rgb_to_int(t_rgb rgb);
+t_point			ft_create_point(double x, double y, t_rgb color);
+t_line			ft_create_line(t_point a, t_point b);
+t_point_3d		ft_create_point_3d(double x, double y, double z, t_rgb color);
+t_point			ft_3d_to_2d(t_point_3d a, t_point p);
+t_pos			ft_create_pos(double max, double min, double dt, double pos);
+t_point			ft_perspective(t_point_3d a, t_point_3d c,
+								t_point_3d thi, t_point_3d e);
 #endif
